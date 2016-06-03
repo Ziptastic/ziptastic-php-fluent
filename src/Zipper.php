@@ -67,8 +67,10 @@ class Zipper extends ZiptasticRequest
     {
         if (substr($name, 0, 4) === 'with') {
             return $this->resolveWith($name, $arguments);
+        } else if (substr(strtolower($name), 0, 7) === 'andwith') {
+            return $this->resolveWith(lcfirst(trim($name,'and')), $arguments);
+
         }
-        dd(substr($name, 0, 4));
         throw new Exception("The method you called [$name] doesn't exist ");
     }
 
@@ -81,7 +83,7 @@ class Zipper extends ZiptasticRequest
     {
         $variable = (substr($with, 4, strlen($with)));
 
-        $parts = preg_split('/(?<=[a-z])(?=[A-Z])/x',$variable);
+        $parts = preg_split('/(?<=[a-z])(?=[A-Z])/x', $variable);
 
         $variable = strtolower(implode('_', $parts));
         return $this->with($variable, $args);
@@ -96,9 +98,8 @@ class Zipper extends ZiptasticRequest
      */
     public function with($variable, $value)
     {
-        if(is_array($value))
-        {
-            if(count($value) == 1){
+        if (is_array($value)) {
+            if (count($value) == 1) {
                 $value = $value[0];
             }
         }
@@ -106,14 +107,4 @@ class Zipper extends ZiptasticRequest
         return $this;
     }
 
-}
-
-function dd()
-{
-    echo '<pre>';
-    foreach (func_get_args() as $arg) {
-        print_r($arg);
-        echo "\n</br></br>\n ";
-    }
-    die('</pre>');
 }
