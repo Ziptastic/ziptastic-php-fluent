@@ -17,7 +17,7 @@
   ],
   "autoload": {
     "psr-4": {
-      "Ziptastic\\Ziptastic\\": "workbench/ziptastic/ziptastic-php-guzzle/src/"
+      "Ziptastic\\Ziptastic\\": "src/"
     }
   },
   "minimum-stability": "stable"
