@@ -2,8 +2,6 @@
 
 namespace Kregel\Ziptastic;
 
-
-use GuzzleHttp\Client;
 use Kregel\Ziptastic\Guzzle\ZiptasticRequest;
 
 class Ziptastic extends ZiptasticRequest
@@ -23,11 +21,13 @@ class Ziptastic extends ZiptasticRequest
 
     /**
      * @param $ziptastic
+     *
      * @return $this
      */
     public function setZiptastic($ziptastic)
     {
         $this->ziptastic = $ziptastic;
+
         return $this;
     }
 
@@ -41,11 +41,13 @@ class Ziptastic extends ZiptasticRequest
 
     /**
      * @param $version
+     *
      * @return $this
      */
     public function setVersion($version)
     {
         $this->version = $version;
+
         return $this;
     }
 
@@ -59,11 +61,13 @@ class Ziptastic extends ZiptasticRequest
 
     /**
      * @param $country
+     *
      * @return $this
      */
     public function setCountry($country)
     {
         $this->country = strtoupper($country);
+
         return $this;
     }
 
@@ -77,11 +81,13 @@ class Ziptastic extends ZiptasticRequest
 
     /**
      * @param $postal_code
+     *
      * @return $this
      */
     public function setPostalCode($postal_code)
     {
         $this->postal_code = $postal_code;
+
         return $this;
     }
 
@@ -93,10 +99,10 @@ class Ziptastic extends ZiptasticRequest
         return $this->coordinates;
     }
 
-
     public function setCoordinates($coordinates)
     {
         $this->coordinates = $coordinates;
+
         return $this;
     }
 
@@ -109,10 +115,10 @@ class Ziptastic extends ZiptasticRequest
     }
 
 
-
     public function setRadius($radius)
     {
         $this->radius = $radius;
+
         return $this;
     }
 
@@ -125,7 +131,7 @@ class Ziptastic extends ZiptasticRequest
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function isIsReverseGeocode()
     {
@@ -134,11 +140,13 @@ class Ziptastic extends ZiptasticRequest
 
     /**
      * @param $is_reverse_geocode
+     *
      * @return $this
      */
     public function setIsReverseGeocode($is_reverse_geocode)
     {
         $this->is_reverse_geocode = $is_reverse_geocode;
+
         return $this;
     }
 
@@ -152,16 +160,19 @@ class Ziptastic extends ZiptasticRequest
 
     /**
      * @param $attributes
+     *
      * @return $this
      */
     public function setAttributes($attributes)
     {
         $this->attributes = $attributes;
+
         return $this;
     }
 
     /**
      * @param $key
+     *
      * @return string
      */
     public function getKey($key)
@@ -171,11 +182,13 @@ class Ziptastic extends ZiptasticRequest
 
     /**
      * @param $key
+     *
      * @return $this
      */
     public function setKey($key)
     {
         $this->key = $key;
+
         return $this;
     }
 }
