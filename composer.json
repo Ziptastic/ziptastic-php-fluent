@@ -1,0 +1,25 @@
+{
+  "name": "ziptastic/ziptastic",
+  "description": "Guzzle based PHP SDK for the Ziptastic Lookup API",
+  "require": {
+    "php": ">=5.4"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "~4.0",
+    "guzzlehttp/guzzle": ">=4.0"
+  },
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Austin Kregel",
+      "email": "me@austinkregel.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Ziptastic\\Ziptastic\\": "workbench/ziptastic/ziptastic-php-guzzle/src/"
+    }
+  },
+  "minimum-stability": "stable"
+
+}
