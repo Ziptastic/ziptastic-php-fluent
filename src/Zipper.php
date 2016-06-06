@@ -7,7 +7,6 @@ use Kregel\Ziptastic\Guzzle\ZiptasticRequest;
 
 class Zipper extends ZiptasticRequest
 {
-
     /**
      * This sets the country code for the call.
      *
@@ -21,7 +20,6 @@ class Zipper extends ZiptasticRequest
 
         return $this;
     }
-
 
     /**
      * Determine what the developer is trying to call on. If it doesn't exist throw an
@@ -46,7 +44,6 @@ class Zipper extends ZiptasticRequest
         throw new Exception("The method you called [$name] doesn't exist ");
     }
 
-
     /**
      * @param $with
      * @param $args
@@ -55,7 +52,7 @@ class Zipper extends ZiptasticRequest
      */
     private function resolveWith($with, $args)
     {
-        $variable = ( substr($with, 4, strlen($with)) );
+        $variable = (substr($with, 4, strlen($with)));
 
         $parts = preg_split('/(?<=[a-z])(?=[A-Z])/x', $variable);
 
@@ -63,7 +60,6 @@ class Zipper extends ZiptasticRequest
 
         return $this->with($variable, $args);
     }
-
 
     /**
      * This is short hand for assigning variables to values.

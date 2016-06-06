@@ -2,14 +2,13 @@
 
 namespace Kregel\Ziptastic\Guzzle;
 
+use ArrayAccess;
 use Exception;
 use GuzzleHttp\Client;
 use JsonSerializable;
-use ArrayAccess;
 
 abstract class ZiptasticRequest implements JsonSerializable, ArrayAccess
 {
-
     /**
      * This is the url to ziptastic.
      *
@@ -82,10 +81,11 @@ abstract class ZiptasticRequest implements JsonSerializable, ArrayAccess
     public $key;
 
     /**
-     * This is used to hide attributes from the toArray method
+     * This is used to hide attributes from the toArray method.
+     *
      * @var array
      */
-    protected $hidden = [ 'client', 'hidden', 'attributes' ];
+    protected $hidden = ['client', 'hidden', 'attributes'];
 
     /**
      * This is the request's client.
@@ -98,7 +98,6 @@ abstract class ZiptasticRequest implements JsonSerializable, ArrayAccess
     {
         $this->attributes = get_object_vars($this);
     }
-
 
     /**
      * Magically get the class variables and if they are not found throw an exception.
@@ -113,15 +112,14 @@ abstract class ZiptasticRequest implements JsonSerializable, ArrayAccess
     {
         if ($this->has($string)) {
             return $this->$string;
-        } elseif ( ! empty( $this->response )) {
+        } elseif (!empty($this->response)) {
             $decoded_response = json_decode($this->response)[0];
-            if (isset( $decoded_response->$string )) {
+            if (isset($decoded_response->$string)) {
                 return $decoded_response->$string;
             }
         }
         throw new Exception("Undefined variable [$string]");
     }
-
 
     /**
      * Magically set the class variables and if they are not found throw an exception.
@@ -143,7 +141,6 @@ abstract class ZiptasticRequest implements JsonSerializable, ArrayAccess
         }
     }
 
-
     /**
      * Check to see if your attributes exist in the attributes array.
      *
@@ -152,7 +149,7 @@ abstract class ZiptasticRequest implements JsonSerializable, ArrayAccess
      *
      * @return bool
      */
-    public function has($string, $attr = [ ])
+    public function has($string, $attr = [])
     {
         if (count($attr) > 0) {
             return in_array($string, $attr) && !in_array($string, $this->hidden);
@@ -161,21 +158,19 @@ abstract class ZiptasticRequest implements JsonSerializable, ArrayAccess
         return in_array($string, array_keys($this->attributes)) && !in_array($string, $this->hidden);
     }
 
-
     /**
      * This executes the Guzzle query to the api.
      */
     public function find()
     {
-        if (empty( $this->key )) {
+        if (empty($this->key)) {
             throw new Exception('A key was not provided');
         }
-        $this->client   = new Client([ 'headers' => [ 'x-key' => $this->key ] ]);
+        $this->client = new Client(['headers' => ['x-key' => $this->key]]);
         $this->response = $this->client->get($this->buildUrl())->getBody()->getContents();
 
         return $this;
     }
-
 
     /**
      * Builds the url for sending the requests to.
@@ -184,15 +179,14 @@ abstract class ZiptasticRequest implements JsonSerializable, ArrayAccess
      */
     protected function buildUrl()
     {
-        $url     = trim($this->ziptastic);
+        $url = trim($this->ziptastic);
         $version = trim($this->version);
         if ($this->is_reverse_geocode === true) {
-            return $url . '/' . $version . '/reverse/' . implode('/', $this->coordinates) . '/' . $this->radius;
+            return $url.'/'.$version.'/reverse/'.implode('/', $this->coordinates).'/'.$this->radius;
         }
 
-        return $url . '/' . $version . '/' . strtoupper($this->country) . '/' . $this->postal_code;
+        return $url.'/'.$version.'/'.strtoupper($this->country).'/'.$this->postal_code;
     }
-
 
     /**
      * json_encode the object.
@@ -203,7 +197,6 @@ abstract class ZiptasticRequest implements JsonSerializable, ArrayAccess
     {
         return json_encode($this->jsonSerialize());
     }
-
 
     /**
      * Specify data which should be serialized to JSON.
@@ -220,7 +213,6 @@ abstract class ZiptasticRequest implements JsonSerializable, ArrayAccess
         return $this->toArray();
     }
 
-
     /**
      * Convert sthis object to an array.
      *
@@ -228,10 +220,10 @@ abstract class ZiptasticRequest implements JsonSerializable, ArrayAccess
      */
     public function toArray()
     {
-        $attr =  [ ];
+        $attr = [];
         $attributes = get_object_vars($this);
         foreach ($attributes as $variable => $value) {
-            if($this->has($variable)) {
+            if ($this->has($variable)) {
                 if (is_string($value) && $this->is_json($value)) {
                     $value = json_decode($value);
                 }
@@ -241,7 +233,6 @@ abstract class ZiptasticRequest implements JsonSerializable, ArrayAccess
 
         return $attr;
     }
-
 
     /**
      * Checks to see if a string is an array.
@@ -257,19 +248,20 @@ abstract class ZiptasticRequest implements JsonSerializable, ArrayAccess
         return json_last_error() == JSON_ERROR_NONE;
     }
 
-
     /**
-     * Whether a offset exists
+     * Whether a offset exists.
+     *
      * @link  http://php.net/manual/en/arrayaccess.offsetexists.php
      *
      * @param mixed $offset <p>
      *                      An offset to check for.
      *                      </p>
      *
-     * @return boolean true on success or false on failure.
-     * </p>
-     * <p>
-     * The return value will be casted to boolean if non-boolean was returned.
+     * @return bool true on success or false on failure.
+     *              </p>
+     *              <p>
+     *              The return value will be casted to boolean if non-boolean was returned.
+     *
      * @since 5.0.0
      */
     public function offsetExists($offset)
@@ -277,9 +269,9 @@ abstract class ZiptasticRequest implements JsonSerializable, ArrayAccess
         return $this->has($offset);
     }
 
-
     /**
-     * Offset to retrieve
+     * Offset to retrieve.
+     *
      * @link  http://php.net/manual/en/arrayaccess.offsetget.php
      *
      * @param mixed $offset <p>
@@ -287,6 +279,7 @@ abstract class ZiptasticRequest implements JsonSerializable, ArrayAccess
      *                      </p>
      *
      * @return mixed Can return all value types.
+     *
      * @since 5.0.0
      */
     public function offsetGet($offset)
@@ -294,9 +287,9 @@ abstract class ZiptasticRequest implements JsonSerializable, ArrayAccess
         return $this->$offset;
     }
 
-
     /**
-     * Offset to set
+     * Offset to set.
+     *
      * @link  http://php.net/manual/en/arrayaccess.offsetset.php
      *
      * @param mixed $offset <p>
@@ -307,6 +300,7 @@ abstract class ZiptasticRequest implements JsonSerializable, ArrayAccess
      *                      </p>
      *
      * @return void
+     *
      * @since 5.0.0
      */
     public function offsetSet($offset, $value)
@@ -314,9 +308,9 @@ abstract class ZiptasticRequest implements JsonSerializable, ArrayAccess
         $this->$offset = $value;
     }
 
-
     /**
-     * Offset to unset
+     * Offset to unset.
+     *
      * @link  http://php.net/manual/en/arrayaccess.offsetunset.php
      *
      * @param mixed $offset <p>
@@ -324,6 +318,7 @@ abstract class ZiptasticRequest implements JsonSerializable, ArrayAccess
      *                      </p>
      *
      * @return void
+     *
      * @since 5.0.0
      */
     public function offsetUnset($offset)
