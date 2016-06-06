@@ -6,7 +6,6 @@ use Kregel\Ziptastic\Guzzle\ZiptasticRequest;
 
 class Ziptastic extends ZiptasticRequest
 {
-
     /**
      * Ziptastic constructor.
      *
@@ -18,7 +17,6 @@ class Ziptastic extends ZiptasticRequest
         $this->setPostalCode($zipcode)->setCountry($country);
     }
 
-
     /**
      * @return string
      */
@@ -26,7 +24,6 @@ class Ziptastic extends ZiptasticRequest
     {
         return $this->ziptastic;
     }
-
 
     /**
      * @param $ziptastic
@@ -36,9 +33,9 @@ class Ziptastic extends ZiptasticRequest
     public function setZiptastic($ziptastic)
     {
         $this->ziptastic = $ziptastic;
+
         return $this;
     }
-
 
     /**
      * @return string
@@ -48,7 +45,6 @@ class Ziptastic extends ZiptasticRequest
         return $this->version;
     }
 
-
     /**
      * @param $version
      *
@@ -57,9 +53,9 @@ class Ziptastic extends ZiptasticRequest
     public function setVersion($version)
     {
         $this->version = $version;
+
         return $this;
     }
-
 
     /**
      * @return string
@@ -69,7 +65,6 @@ class Ziptastic extends ZiptasticRequest
         return $this->country;
     }
 
-
     /**
      * @param $country
      *
@@ -78,9 +73,9 @@ class Ziptastic extends ZiptasticRequest
     public function setCountry($country)
     {
         $this->country = $country;
+
         return $this;
     }
-
 
     /**
      * @return int|string
@@ -90,7 +85,6 @@ class Ziptastic extends ZiptasticRequest
         return $this->postal_code;
     }
 
-
     /**
      * @param $postal_code
      *
@@ -99,9 +93,9 @@ class Ziptastic extends ZiptasticRequest
     public function setPostalCode($postal_code)
     {
         $this->postal_code = $postal_code;
+
         return $this;
     }
-
 
     /**
      * @return array
@@ -111,7 +105,6 @@ class Ziptastic extends ZiptasticRequest
         return $this->coordinates;
     }
 
-
     /**
      * @param $coordinates
      *
@@ -120,9 +113,9 @@ class Ziptastic extends ZiptasticRequest
     public function setCoordinates($coordinates)
     {
         $this->coordinates = $coordinates;
+
         return $this;
     }
-
 
     /**
      * @return int
@@ -132,17 +125,17 @@ class Ziptastic extends ZiptasticRequest
         return $this->radius;
     }
 
+/**
+ * @param $radius
+ *
+ * @return $this
+ */
+public function setRadius($radius)
+{
+    $this->radius = $radius;
 
-    /**
-     * @param $radius
-     *
-     * @return $this
-     */public function setRadius($radius)
-    {
-        $this->radius = $radius;
-        return $this;
-    }
-
+    return $this;
+}
 
     /**
      * @return null|string
@@ -152,7 +145,6 @@ class Ziptastic extends ZiptasticRequest
         return $this->response;
     }
 
-
     /**
      * @param $response
      *
@@ -161,29 +153,29 @@ class Ziptastic extends ZiptasticRequest
     public function setResponse($response)
     {
         $this->response = $response;
+
         return $this;
     }
 
-
     /**
-     * @return boolean
+     * @return bool
      */
     public function isIsReverseGeocode()
     {
         return $this->is_reverse_geocode;
     }
 
+/**
+ * @param $is_reverse_geocode
+ *
+ * @return $this
+ */
+public function setIsReverseGeocode($is_reverse_geocode)
+{
+    $this->is_reverse_geocode = $is_reverse_geocode;
 
-    /**
-     * @param $is_reverse_geocode
-     *
-     * @return $this
-     */public function setIsReverseGeocode($is_reverse_geocode)
-    {
-        $this->is_reverse_geocode = $is_reverse_geocode;
-        return $this;
-    }
-
+    return $this;
+}
 
     /**
      * @return array
@@ -193,7 +185,6 @@ class Ziptastic extends ZiptasticRequest
         return $this->attributes;
     }
 
-
     /**
      * @param $attributes
      *
@@ -202,9 +193,9 @@ class Ziptastic extends ZiptasticRequest
     public function setAttributes($attributes)
     {
         $this->attributes = $attributes;
+
         return $this;
     }
-
 
     /**
      * @return string
@@ -214,7 +205,6 @@ class Ziptastic extends ZiptasticRequest
         return $this->key;
     }
 
-
     /**
      * @param $key
      *
@@ -223,9 +213,9 @@ class Ziptastic extends ZiptasticRequest
     public function setKey($key)
     {
         $this->key = $key;
+
         return $this;
     }
-
 
     /**
      * @return array
@@ -235,7 +225,6 @@ class Ziptastic extends ZiptasticRequest
         return $this->hidden;
     }
 
-
     /**
      * @param $hidden
      *
@@ -244,9 +233,9 @@ class Ziptastic extends ZiptasticRequest
     public function setHidden($hidden)
     {
         $this->hidden = $hidden;
+
         return $this;
     }
-
 
     /**
      * @return Client
@@ -256,7 +245,6 @@ class Ziptastic extends ZiptasticRequest
         return $this->client;
     }
 
-
     /**
      * @param $client
      *
@@ -265,6 +253,7 @@ class Ziptastic extends ZiptasticRequest
     public function setClient($client)
     {
         $this->client = $client;
+
         return $this;
     }
 }
