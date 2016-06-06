@@ -8,7 +8,6 @@ class ZiptasticTest extends PHPUnit_Framework_TestCase
 
     public function testZipper()
     {
-        $results = (new Ziptastic(23042,'us'))->setKey($this->key)->find();
-
+        $results = (new Ziptastic(23042, 'us'))->setKey($this->key)->find();
     }
 }
