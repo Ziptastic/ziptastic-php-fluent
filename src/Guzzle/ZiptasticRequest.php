@@ -149,8 +149,6 @@ class ZiptasticRequest implements JsonSerializable
     public function has($string, $attr = [])
     {
         if (count($attr) > 0) {
-            \Kregel\Ziptastic\dd($attr);
-
             return in_array($string, $attr);
         }
 
