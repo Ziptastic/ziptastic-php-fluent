@@ -2,6 +2,8 @@
 
 # Ziptastic PHP with Guzzle
 
+This package was brought into existence because of [this packages](https://github.com/Ziptastic/ziptastic-php), specifically because of the [first enhancement](https://github.com/Ziptastic/ziptastic-php/issues/1)
+
 This library is a [Guzzle](http://docs.guzzlephp.org/en/latest/) based interface for the [Ziptastic API](https://getziptastic.com/).
 
 Using Ziptastic requires an API key, you can get one by signing up with Ziptastic.
