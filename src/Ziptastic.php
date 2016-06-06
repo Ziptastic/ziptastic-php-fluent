@@ -114,7 +114,6 @@ class Ziptastic extends ZiptasticRequest
         return $this->radius;
     }
 
-
     public function setRadius($radius)
     {
         $this->radius = $radius;

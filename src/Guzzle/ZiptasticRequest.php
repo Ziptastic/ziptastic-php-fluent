@@ -8,7 +8,6 @@ use JsonSerializable;
 
 class ZiptasticRequest implements JsonSerializable
 {
-
     /**
      * This is the url to ziptastic.
      *
@@ -87,7 +86,6 @@ class ZiptasticRequest implements JsonSerializable
      */
     protected $client;
 
-
     /**
      * Sets the base attributes
      * ZiptasticRequest constructor.
@@ -96,7 +94,6 @@ class ZiptasticRequest implements JsonSerializable
     {
         $this->attributes = get_object_vars($this);
     }
-
 
     /**
      * Magically get the class variables and if they are not found throw an exception.
@@ -111,15 +108,14 @@ class ZiptasticRequest implements JsonSerializable
     {
         if ($this->has($string)) {
             return $this->$string;
-        } elseif ( ! empty( $this->response )) {
+        } elseif (!empty($this->response)) {
             $decoded_response = json_decode($this->response)[0];
-            if (isset( $decoded_response->$string )) {
+            if (isset($decoded_response->$string)) {
                 return $decoded_response->$string;
             }
         }
         throw new Exception("Undefined variable [$string]");
     }
-
 
     /**
      * Magically set the class variables and if they are not found throw an exception.
@@ -142,7 +138,6 @@ class ZiptasticRequest implements JsonSerializable
         throw new Exception("Undefined variable [$string]");
     }
 
-
     /**
      * Check to see if your attributes exist in the attributes array.
      *
@@ -151,7 +146,7 @@ class ZiptasticRequest implements JsonSerializable
      *
      * @return bool
      */
-    public function has($string, $attr = [ ])
+    public function has($string, $attr = [])
     {
         if (count($attr) > 0) {
             \Kregel\Ziptastic\dd($attr);
@@ -162,21 +157,19 @@ class ZiptasticRequest implements JsonSerializable
         return in_array($string, $this->attributes);
     }
 
-
     /**
      * This executes the Guzzle query to the api.
      */
     public function find()
     {
-        if (empty( $this->key )) {
+        if (empty($this->key)) {
             throw new Exception('A key was not provided');
         }
-        $this->client   = new Client([ 'headers' => [ 'x-key' => $this->key ] ]);
+        $this->client = new Client(['headers' => ['x-key' => $this->key]]);
         $this->response = $this->client->get($this->buildUrl())->getBody()->getContents();
 
         return $this;
     }
-
 
     /**
      * Builds the url for sending the requests to.
@@ -185,15 +178,14 @@ class ZiptasticRequest implements JsonSerializable
      */
     protected function buildUrl()
     {
-        $url     = trim($this->ziptastic);
+        $url = trim($this->ziptastic);
         $version = trim($this->version);
         if ($this->is_reverse_geocode === true) {
-            return $url . '/' . $version . '/reverse/' . implode('/', $this->coordinates) . '/' . $this->radius;
+            return $url.'/'.$version.'/reverse/'.implode('/', $this->coordinates).'/'.$this->radius;
         }
 
-        return $url . '/' . $version . '/' . strtoupper($this->country) . '/' . $this->postal_code;
+        return $url.'/'.$version.'/'.strtoupper($this->country).'/'.$this->postal_code;
     }
-
 
     /**
      * json_encode the object.
@@ -204,7 +196,6 @@ class ZiptasticRequest implements JsonSerializable
     {
         return json_encode($this->jsonSerialize(), JSON_PRETTY_PRINT);
     }
-
 
     /**
      * Specify data which should be serialized to JSON.
@@ -223,7 +214,6 @@ class ZiptasticRequest implements JsonSerializable
         return $this->toArray();
     }
 
-
     /**
      * Convert sthis object to an array.
      *
@@ -231,7 +221,7 @@ class ZiptasticRequest implements JsonSerializable
      */
     public function toArray()
     {
-        $attr = [ ];
+        $attr = [];
         foreach ($this->attributes as $variable => $value) {
             if (is_string($value) && $this->is_json($value)) {
                 $value = json_decode($value);
@@ -241,7 +231,6 @@ class ZiptasticRequest implements JsonSerializable
 
         return $attr;
     }
-
 
     /**
      * Checks to see if a string is an array.
