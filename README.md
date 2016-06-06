@@ -2,7 +2,7 @@
 
 # Ziptastic PHP with Guzzle
 
-This package was brought into existence because of [this packages](https://github.com/Ziptastic/ziptastic-php), specifically because of the [first enhancement](https://github.com/Ziptastic/ziptastic-php/issues/1)
+This package was brought into existence because of [this package](https://github.com/Ziptastic/ziptastic-php), specifically because of the [first enhancement](https://github.com/Ziptastic/ziptastic-php/issues/1)
 
 This library is a [Guzzle](http://docs.guzzlephp.org/en/latest/) based interface for the [Ziptastic API](https://getziptastic.com/).
 
@@ -28,6 +28,8 @@ include "vendor/autoload.php";
 
 use Kregel\Ziptastic\Zipper;
 
+$key = 'Your Api Key from ziptastic';
+
 $results = (new Zipper)->in('US')->withPostalCode(48867)->andWithKey($key)->find();
 echo $results->response;
 ?>
@@ -41,6 +43,8 @@ If that isn't your cup of tea or you just want to get things done, you can use `
 include "vendor/autoload.php";
 
 use Kregel\Ziptastic\Ziptastic;
+
+$key = 'Your Api Key from ziptastic';
 
 $results = (new Ziptastic(23042,'us'))->setKey($key)->find();
 
@@ -57,6 +61,8 @@ The first way to use this is by using `Zipper` which will be using a more "plain
 include "vendor/autoload.php";
 
 use Kregel\Ziptastic\Zipper;
+
+$key = 'Your Api Key from ziptastic';
 
 $results = (new Zipper)->in('US')->withPostalCode(48867)->andWithKey($key)->find();
 echo $results->city, ', ',$results->state,' ',$results->postal_code;
