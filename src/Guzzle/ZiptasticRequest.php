@@ -5,9 +5,11 @@ namespace Kregel\Ziptastic\Guzzle;
 use Exception;
 use GuzzleHttp\Client;
 use JsonSerializable;
+use ArrayAccess;
 
-class ZiptasticRequest implements JsonSerializable
+abstract class ZiptasticRequest implements JsonSerializable, ArrayAccess
 {
+
     /**
      * This is the url to ziptastic.
      *
@@ -59,7 +61,7 @@ class ZiptasticRequest implements JsonSerializable
     public $response;
 
     /**
-     * Thisis used when buidling the URL to determine which style of url is needed.
+     * This is used when buidling the URL to determine which style of url is needed.
      *
      * @var bool
      */
@@ -80,20 +82,23 @@ class ZiptasticRequest implements JsonSerializable
     public $key;
 
     /**
+     * This is used to hide attributes from the toArray method
+     * @var array
+     */
+    protected $hidden = [ 'client', 'hidden', 'attributes' ];
+
+    /**
      * This is the request's client.
      *
      * @var Client
      */
-    protected $client;
+    private $client;
 
-    /**
-     * Sets the base attributes
-     * ZiptasticRequest constructor.
-     */
     public function __construct()
     {
         $this->attributes = get_object_vars($this);
     }
+
 
     /**
      * Magically get the class variables and if they are not found throw an exception.
@@ -108,14 +113,15 @@ class ZiptasticRequest implements JsonSerializable
     {
         if ($this->has($string)) {
             return $this->$string;
-        } elseif (!empty($this->response)) {
+        } elseif ( ! empty( $this->response )) {
             $decoded_response = json_decode($this->response)[0];
-            if (isset($decoded_response->$string)) {
+            if (isset( $decoded_response->$string )) {
                 return $decoded_response->$string;
             }
         }
         throw new Exception("Undefined variable [$string]");
     }
+
 
     /**
      * Magically set the class variables and if they are not found throw an exception.
@@ -132,11 +138,11 @@ class ZiptasticRequest implements JsonSerializable
     {
         if ($this->has($string)) {
             $this->$string = $args;
-
-            return $this;
+        } else {
+            throw new Exception("Undefined variable [$string]");
         }
-        throw new Exception("Undefined variable [$string]");
     }
+
 
     /**
      * Check to see if your attributes exist in the attributes array.
@@ -146,28 +152,30 @@ class ZiptasticRequest implements JsonSerializable
      *
      * @return bool
      */
-    public function has($string, $attr = [])
+    public function has($string, $attr = [ ])
     {
         if (count($attr) > 0) {
-            return in_array($string, $attr);
+            return in_array($string, $attr) && !in_array($string, $this->hidden);
         }
 
-        return in_array($string, $this->attributes);
+        return in_array($string, array_keys($this->attributes)) && !in_array($string, $this->hidden);
     }
+
 
     /**
      * This executes the Guzzle query to the api.
      */
     public function find()
     {
-        if (empty($this->key)) {
+        if (empty( $this->key )) {
             throw new Exception('A key was not provided');
         }
-        $this->client = new Client(['headers' => ['x-key' => $this->key]]);
+        $this->client   = new Client([ 'headers' => [ 'x-key' => $this->key ] ]);
         $this->response = $this->client->get($this->buildUrl())->getBody()->getContents();
 
         return $this;
     }
+
 
     /**
      * Builds the url for sending the requests to.
@@ -176,14 +184,15 @@ class ZiptasticRequest implements JsonSerializable
      */
     protected function buildUrl()
     {
-        $url = trim($this->ziptastic);
+        $url     = trim($this->ziptastic);
         $version = trim($this->version);
         if ($this->is_reverse_geocode === true) {
-            return $url.'/'.$version.'/reverse/'.implode('/', $this->coordinates).'/'.$this->radius;
+            return $url . '/' . $version . '/reverse/' . implode('/', $this->coordinates) . '/' . $this->radius;
         }
 
-        return $url.'/'.$version.'/'.strtoupper($this->country).'/'.$this->postal_code;
+        return $url . '/' . $version . '/' . strtoupper($this->country) . '/' . $this->postal_code;
     }
+
 
     /**
      * json_encode the object.
@@ -192,8 +201,9 @@ class ZiptasticRequest implements JsonSerializable
      */
     public function __toString()
     {
-        return json_encode($this->jsonSerialize(), JSON_PRETTY_PRINT);
+        return json_encode($this->jsonSerialize());
     }
+
 
     /**
      * Specify data which should be serialized to JSON.
@@ -207,10 +217,9 @@ class ZiptasticRequest implements JsonSerializable
      */
     public function jsonSerialize()
     {
-        $this->attributes = get_object_vars($this);
-
         return $this->toArray();
     }
+
 
     /**
      * Convert sthis object to an array.
@@ -219,16 +228,20 @@ class ZiptasticRequest implements JsonSerializable
      */
     public function toArray()
     {
-        $attr = [];
-        foreach ($this->attributes as $variable => $value) {
-            if (is_string($value) && $this->is_json($value)) {
-                $value = json_decode($value);
+        $attr =  [ ];
+        $attributes = get_object_vars($this);
+        foreach ($attributes as $variable => $value) {
+            if($this->has($variable)) {
+                if (is_string($value) && $this->is_json($value)) {
+                    $value = json_decode($value);
+                }
+                $attr[$variable] = $value;
             }
-            $attr[$variable] = $value;
         }
 
         return $attr;
     }
+
 
     /**
      * Checks to see if a string is an array.
@@ -242,5 +255,79 @@ class ZiptasticRequest implements JsonSerializable
         json_decode($string);
 
         return json_last_error() == JSON_ERROR_NONE;
+    }
+
+
+    /**
+     * Whether a offset exists
+     * @link  http://php.net/manual/en/arrayaccess.offsetexists.php
+     *
+     * @param mixed $offset <p>
+     *                      An offset to check for.
+     *                      </p>
+     *
+     * @return boolean true on success or false on failure.
+     * </p>
+     * <p>
+     * The return value will be casted to boolean if non-boolean was returned.
+     * @since 5.0.0
+     */
+    public function offsetExists($offset)
+    {
+        return $this->has($offset);
+    }
+
+
+    /**
+     * Offset to retrieve
+     * @link  http://php.net/manual/en/arrayaccess.offsetget.php
+     *
+     * @param mixed $offset <p>
+     *                      The offset to retrieve.
+     *                      </p>
+     *
+     * @return mixed Can return all value types.
+     * @since 5.0.0
+     */
+    public function offsetGet($offset)
+    {
+        return $this->$offset;
+    }
+
+
+    /**
+     * Offset to set
+     * @link  http://php.net/manual/en/arrayaccess.offsetset.php
+     *
+     * @param mixed $offset <p>
+     *                      The offset to assign the value to.
+     *                      </p>
+     * @param mixed $value  <p>
+     *                      The value to set.
+     *                      </p>
+     *
+     * @return void
+     * @since 5.0.0
+     */
+    public function offsetSet($offset, $value)
+    {
+        $this->$offset = $value;
+    }
+
+
+    /**
+     * Offset to unset
+     * @link  http://php.net/manual/en/arrayaccess.offsetunset.php
+     *
+     * @param mixed $offset <p>
+     *                      The offset to unset.
+     *                      </p>
+     *
+     * @return void
+     * @since 5.0.0
+     */
+    public function offsetUnset($offset)
+    {
+        $this->$offset = null;
     }
 }
