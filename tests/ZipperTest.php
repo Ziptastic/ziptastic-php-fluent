@@ -8,6 +8,6 @@ class ZipperTest extends PHPUnit_Framework_TestCase
 
     public function testZipper()
     {
-        $zipper = (new Zipper())->in('US')->withPostalCode(48867)->andWithKey($this->key);
+        $zipper = (new Zipper)->in('US')->withPostalCode(48867)->andWithKey($this->key);
     }
 }
