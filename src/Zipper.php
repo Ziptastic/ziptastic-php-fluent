@@ -24,6 +24,51 @@ class Zipper extends ZiptasticRequest
 
 
     /**
+     * Magically get the class variables and if they are not found throw an exception.
+     *
+     * @param $string
+     *
+     * @throws Exception
+     *
+     * @return mixed
+     */
+    public function __get($string)
+    {
+        if ($this->has($string)) {
+            return $this->$string;
+        } elseif ( ! empty( $this->response )) {
+            $decoded_response = json_decode($this->response)[0];
+            if (isset( $decoded_response->$string )) {
+                return $decoded_response->$string;
+            }
+        }
+        throw new Exception("Undefined variable [$string]");
+    }
+
+
+    /**
+     * Magically set the class variables and if they are not found throw an exception.
+     * Otherwise set the variables to the requested value.
+     *
+     * @param $string
+     * @param $args
+     *
+     * @throws Exception
+     *
+     * @return mixed
+     */
+    public function __set($string, $args)
+    {
+        if ($this->has($string)) {
+            $this->$string = $args;
+
+            return $this;
+        }
+        throw new Exception("Undefined variable [$string]");
+    }
+
+
+    /**
      * Determine what the developer is trying to call on. If it doesn't exist throw an
      * exception to let them know their variable cannot be found.
      *
@@ -53,6 +98,7 @@ class Zipper extends ZiptasticRequest
      */
     private function resolveWith($with, $args)
     {
+
         $variable = ( substr($with, 4, strlen($with)) );
 
         $parts = preg_split('/(?<=[a-z])(?=[A-Z])/x', $variable);
