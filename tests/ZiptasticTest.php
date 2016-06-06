@@ -4,11 +4,11 @@ use Kregel\Ziptastic\Ziptastic;
 
 class ZiptasticTest extends PHPUnit_Framework_TestCase
 {
-    protected $key = '';
+    protected $key = '123';
 
-    public function testZipper()
+    public function testZiptastic()
     {
-        $results = (new Ziptastic(23042,'us'))->setKey($this->key)->find();
+        $results = (new Ziptastic(23042,'us'))->setKey($this->key);
 
     }
 }

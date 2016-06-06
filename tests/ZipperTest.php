@@ -4,7 +4,7 @@ use Kregel\Ziptastic\Zipper;
 
 class ZipperTest extends PHPUnit_Framework_TestCase
 {
-    protected $key = '';
+    protected $key = '123';
 
     public function testZipper()
     {
