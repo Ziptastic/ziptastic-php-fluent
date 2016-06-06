@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/austinkregel/ziptastic-php-guzzle.svg?branch=master)](https://travis-ci.org/austinkregel/ziptastic-php-guzzle)
+
 # Ziptastic PHP with Guzzle
 
 This library is a [Guzzle](http://docs.guzzlephp.org/en/latest/) based interface for the [Ziptastic API](https://getziptastic.com/).
