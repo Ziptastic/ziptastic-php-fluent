@@ -9,8 +9,8 @@ class Ziptastic extends ZiptasticRequest
     /**
      * Ziptastic constructor.
      *
-     * @param $zipcode
-     * @param $country
+     * @param int|string $zipcode
+     * @param string $country
      */
     public function __construct($zipcode, $country)
     {
@@ -26,7 +26,7 @@ class Ziptastic extends ZiptasticRequest
     }
 
     /**
-     * @param $ziptastic
+     * @param string $ziptastic
      *
      * @return $this
      */
@@ -46,7 +46,7 @@ class Ziptastic extends ZiptasticRequest
     }
 
     /**
-     * @param $version
+     * @param string $version
      *
      * @return $this
      */
@@ -66,7 +66,7 @@ class Ziptastic extends ZiptasticRequest
     }
 
     /**
-     * @param $country
+     * @param tring $country
      *
      * @return $this
      */
@@ -86,7 +86,7 @@ class Ziptastic extends ZiptasticRequest
     }
 
     /**
-     * @param $postal_code
+     * @param int|string $postal_code
      *
      * @return $this
      */
@@ -106,7 +106,7 @@ class Ziptastic extends ZiptasticRequest
     }
 
     /**
-     * @param $coordinates
+     * @param array $coordinates
      *
      * @return $this
      */
@@ -125,20 +125,20 @@ class Ziptastic extends ZiptasticRequest
         return $this->radius;
     }
 
-/**
- * @param $radius
- *
- * @return $this
- */
-public function setRadius($radius)
-{
-    $this->radius = $radius;
-
-    return $this;
-}
+    /**
+     * @param double $radius
+     *
+     * @return $this
+     */
+    public function setRadius($radius)
+    {
+        $this->radius = $radius;
+    
+        return $this;
+    }
 
     /**
-     * @return null|string
+     * @return string
      */
     public function getResponse()
     {
@@ -146,7 +146,7 @@ public function setRadius($radius)
     }
 
     /**
-     * @param $response
+     * @param string $response
      *
      * @return $this
      */
@@ -165,17 +165,17 @@ public function setRadius($radius)
         return $this->is_reverse_geocode;
     }
 
-/**
- * @param $is_reverse_geocode
- *
- * @return $this
- */
-public function setIsReverseGeocode($is_reverse_geocode)
-{
-    $this->is_reverse_geocode = $is_reverse_geocode;
-
-    return $this;
-}
+    /**
+     * @param bool $is_reverse_geocode
+     *
+     * @return $this
+     */
+    public function setIsReverseGeocode($is_reverse_geocode)
+    {
+        $this->is_reverse_geocode = $is_reverse_geocode;
+    
+        return $this;
+    }
 
     /**
      * @return array
@@ -186,7 +186,7 @@ public function setIsReverseGeocode($is_reverse_geocode)
     }
 
     /**
-     * @param $attributes
+     * @param array $attributes
      *
      * @return $this
      */
@@ -206,7 +206,7 @@ public function setIsReverseGeocode($is_reverse_geocode)
     }
 
     /**
-     * @param $key
+     * @param string $key
      *
      * @return $this
      */
@@ -246,7 +246,7 @@ public function setIsReverseGeocode($is_reverse_geocode)
     }
 
     /**
-     * @param $client
+     * @param Client $client
      *
      * @return $this
      */
