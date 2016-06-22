@@ -33,7 +33,7 @@ abstract class ZiptasticRequest implements JsonSerializable, ArrayAccess
     /**
      * This should be the request's postal code.
      *
-     * @var string|int
+     * @var int|string
      */
     public $postal_code;
 
@@ -55,7 +55,7 @@ abstract class ZiptasticRequest implements JsonSerializable, ArrayAccess
     /**
      * This is the client's response.
      *
-     * @var string|null
+     * @var string
      */
     public $response;
 
@@ -102,7 +102,7 @@ abstract class ZiptasticRequest implements JsonSerializable, ArrayAccess
     /**
      * Magically get the class variables and if they are not found throw an exception.
      *
-     * @param $string
+     * @param string $string
      *
      * @throws Exception
      *
@@ -125,8 +125,8 @@ abstract class ZiptasticRequest implements JsonSerializable, ArrayAccess
      * Magically set the class variables and if they are not found throw an exception.
      * Otherwise set the variables to the requested value.
      *
-     * @param $string
-     * @param $args
+     * @param string $string
+     * @param mixed  $args
      *
      * @throws Exception
      *
@@ -144,8 +144,8 @@ abstract class ZiptasticRequest implements JsonSerializable, ArrayAccess
     /**
      * Check to see if your attributes exist in the attributes array.
      *
-     * @param       $string
-     * @param array $attr
+     * @param string $string
+     * @param array  $attr
      *
      * @return bool
      */
@@ -160,6 +160,8 @@ abstract class ZiptasticRequest implements JsonSerializable, ArrayAccess
 
     /**
      * This executes the Guzzle query to the api.
+     * 
+     * @return ZiptasticRequest
      */
     public function find()
     {
@@ -201,12 +203,7 @@ abstract class ZiptasticRequest implements JsonSerializable, ArrayAccess
     /**
      * Specify data which should be serialized to JSON.
      *
-     * @link  http://php.net/manual/en/jsonserializable.jsonserialize.php
-     *
-     * @return mixed data which can be serialized by <b>json_encode</b>,
-     *               which is a value of any type other than a resource.
-     *
-     * @since 5.4.0
+     * @return array
      */
     public function jsonSerialize()
     {
@@ -237,7 +234,7 @@ abstract class ZiptasticRequest implements JsonSerializable, ArrayAccess
     /**
      * Checks to see if a string is an array.
      *
-     * @param $string
+     * @param string $string
      *
      * @return bool
      */
@@ -253,16 +250,9 @@ abstract class ZiptasticRequest implements JsonSerializable, ArrayAccess
      *
      * @link  http://php.net/manual/en/arrayaccess.offsetexists.php
      *
-     * @param mixed $offset <p>
-     *                      An offset to check for.
-     *                      </p>
-     *
+     * @param int|string  $offset 
+     * 
      * @return bool true on success or false on failure.
-     *              </p>
-     *              <p>
-     *              The return value will be casted to boolean if non-boolean was returned.
-     *
-     * @since 5.0.0
      */
     public function offsetExists($offset)
     {
@@ -271,16 +261,10 @@ abstract class ZiptasticRequest implements JsonSerializable, ArrayAccess
 
     /**
      * Offset to retrieve.
-     *
-     * @link  http://php.net/manual/en/arrayaccess.offsetget.php
-     *
-     * @param mixed $offset <p>
-     *                      The offset to retrieve.
-     *                      </p>
-     *
+     * 
+     * @param mixed $offset
+     * 
      * @return mixed Can return all value types.
-     *
-     * @since 5.0.0
      */
     public function offsetGet($offset)
     {
@@ -290,18 +274,10 @@ abstract class ZiptasticRequest implements JsonSerializable, ArrayAccess
     /**
      * Offset to set.
      *
-     * @link  http://php.net/manual/en/arrayaccess.offsetset.php
-     *
-     * @param mixed $offset <p>
-     *                      The offset to assign the value to.
-     *                      </p>
-     * @param mixed $value  <p>
-     *                      The value to set.
-     *                      </p>
-     *
+     * @param mixed $offset 
+     * @param mixed $value 
+     * 
      * @return void
-     *
-     * @since 5.0.0
      */
     public function offsetSet($offset, $value)
     {
@@ -310,16 +286,10 @@ abstract class ZiptasticRequest implements JsonSerializable, ArrayAccess
 
     /**
      * Offset to unset.
-     *
-     * @link  http://php.net/manual/en/arrayaccess.offsetunset.php
-     *
-     * @param mixed $offset <p>
-     *                      The offset to unset.
-     *                      </p>
-     *
+     * 
+     * @param mixed $offset 
+     * 
      * @return void
-     *
-     * @since 5.0.0
      */
     public function offsetUnset($offset)
     {
