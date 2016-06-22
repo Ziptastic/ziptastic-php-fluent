@@ -26,7 +26,7 @@ class Zipper extends ZiptasticRequest
      * exception to let them know their variable cannot be found.
      *
      * @param string $name
-     * @param array $arguments
+     * @param array  $arguments
      *
      * @throws Exception
      *
@@ -62,11 +62,11 @@ class Zipper extends ZiptasticRequest
         // Split the capital and lower cased words, so if someone passes a PostalCode
         // We can resolve it to postal_code
         $parts = preg_split('/(?<=[a-z])(?=[A-Z])/x', $variable);
-        
+
         // Here we change the array of parts into just one word and glue them together with
         // and underscore, which follows the desired name convention.
         $variable = strtolower(implode('_', $parts));
-        
+
         // Call and return with
         return $this->with($variable, $args);
     }
@@ -81,7 +81,7 @@ class Zipper extends ZiptasticRequest
      */
     public function with($variable, $value)
     {
-        // If the variable is an array with a singel value we just want that value, 
+        // If the variable is an array with a singel value we just want that value,
         // So we grab the first element and set it equal to the value. Otherwise we just
         // Pass the value through.
         if (is_array($value)) {
