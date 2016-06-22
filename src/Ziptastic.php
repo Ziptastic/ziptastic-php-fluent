@@ -10,7 +10,7 @@ class Ziptastic extends ZiptasticRequest
      * Ziptastic constructor.
      *
      * @param int|string $zipcode
-     * @param string $country
+     * @param string     $country
      */
     public function __construct($zipcode, $country)
     {
@@ -126,14 +126,14 @@ class Ziptastic extends ZiptasticRequest
     }
 
     /**
-     * @param double $radius
+     * @param float $radius
      *
      * @return $this
      */
     public function setRadius($radius)
     {
         $this->radius = $radius;
-    
+
         return $this;
     }
 
@@ -173,7 +173,7 @@ class Ziptastic extends ZiptasticRequest
     public function setIsReverseGeocode($is_reverse_geocode)
     {
         $this->is_reverse_geocode = $is_reverse_geocode;
-    
+
         return $this;
     }
 
