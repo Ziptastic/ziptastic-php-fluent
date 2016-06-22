@@ -160,7 +160,7 @@ abstract class ZiptasticRequest implements JsonSerializable, ArrayAccess
 
     /**
      * This executes the Guzzle query to the api.
-     * 
+     *
      * @return ZiptasticRequest
      */
     public function find()
@@ -250,8 +250,8 @@ abstract class ZiptasticRequest implements JsonSerializable, ArrayAccess
      *
      * @link  http://php.net/manual/en/arrayaccess.offsetexists.php
      *
-     * @param int|string  $offset 
-     * 
+     * @param int|string $offset
+     *
      * @return bool true on success or false on failure.
      */
     public function offsetExists($offset)
@@ -261,9 +261,9 @@ abstract class ZiptasticRequest implements JsonSerializable, ArrayAccess
 
     /**
      * Offset to retrieve.
-     * 
+     *
      * @param mixed $offset
-     * 
+     *
      * @return mixed Can return all value types.
      */
     public function offsetGet($offset)
@@ -274,9 +274,9 @@ abstract class ZiptasticRequest implements JsonSerializable, ArrayAccess
     /**
      * Offset to set.
      *
-     * @param mixed $offset 
-     * @param mixed $value 
-     * 
+     * @param mixed $offset
+     * @param mixed $value
+     *
      * @return void
      */
     public function offsetSet($offset, $value)
@@ -286,9 +286,9 @@ abstract class ZiptasticRequest implements JsonSerializable, ArrayAccess
 
     /**
      * Offset to unset.
-     * 
-     * @param mixed $offset 
-     * 
+     *
+     * @param mixed $offset
+     *
      * @return void
      */
     public function offsetUnset($offset)
