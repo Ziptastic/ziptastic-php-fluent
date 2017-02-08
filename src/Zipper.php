@@ -1,9 +1,9 @@
 <?php
 
-namespace Ziptastic\Guzzle;
+namespace Ziptastic\Fluent;
 
 use Exception;
-use Ziptastic\Guzzle\Guzzle\ZiptasticRequest;
+use Ziptastic\Fluent\Guzzle\ZiptasticRequest;
 
 class Zipper extends ZiptasticRequest
 {
