@@ -1,8 +1,8 @@
 <?php
 
-namespace Kregel\Ziptastic;
+namespace Ziptastic\Guzzle;
 
-use Kregel\Ziptastic\Guzzle\ZiptasticRequest;
+use Ziptastic\Guzzle\Guzzle\ZiptasticRequest;
 
 class Ziptastic extends ZiptasticRequest
 {
