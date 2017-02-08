@@ -1,6 +1,6 @@
 <?php
 
-use Ziptastic\Guzzle\Zipper;
+use Ziptastic\Fluent\Zipper;
 
 class ZipperTest extends PHPUnit_Framework_TestCase
 {
