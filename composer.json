@@ -1,5 +1,5 @@
 {
-  "name": "kregel/ziptastic",
+  "name": "ziptastic/guzzle",
   "description": "Guzzle based PHP SDK for the Ziptastic Lookup API",
   "require": {
     "php": ">=5.4"
