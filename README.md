@@ -11,7 +11,7 @@ Using Ziptastic requires an API key, you can get one by signing up with Ziptasti
 Ziptastic PHP can be installed via composer:
 
 ````
-composer require ziptastic/guzzle
+composer require ziptastic/fluent
 ````
 
 ## Usage
@@ -24,7 +24,7 @@ The first way to use this is by using `Zipper` which will be using a more "plain
 
 include "vendor/autoload.php";
 
-use Ziptastic\Guzzle\Zipper;
+use Ziptastic\Fluent\Zipper;
 
 $key = 'Your Api Key from ziptastic';
 
@@ -40,7 +40,7 @@ If that isn't your cup of tea or you just want to get things done, you can use `
 
 include "vendor/autoload.php";
 
-use Ziptastic\Guzzle\Ziptastic;
+use Ziptastic\Fluent\Ziptastic;
 
 $key = 'Your Api Key from ziptastic';
 
@@ -58,7 +58,7 @@ The first way to use this is by using `Zipper` which will be using a more "plain
 
 include "vendor/autoload.php";
 
-use Ziptastic\Guzzle\Zipper;
+use Ziptastic\Fluent\Zipper;
 
 $key = 'Your Api Key from ziptastic';
 

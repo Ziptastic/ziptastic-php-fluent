@@ -1,8 +1,8 @@
 <?php
 
-namespace Ziptastic\Guzzle;
+namespace Ziptastic\Fluent;
 
-use Ziptastic\Guzzle\Guzzle\ZiptasticRequest;
+use Ziptastic\Fluent\Guzzle\ZiptasticRequest;
 
 class Ziptastic extends ZiptasticRequest
 {
