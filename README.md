@@ -1,5 +1,3 @@
-[![Build Status](https://travis-ci.org/austinkregel/ziptastic-php-guzzle.svg?branch=master)](https://travis-ci.org/austinkregel/ziptastic-php-guzzle)
-
 # Ziptastic PHP with Guzzle
 
 This package was brought into existence because of [this package](https://github.com/Ziptastic/ziptastic-php), specifically because of the [first enhancement](https://github.com/Ziptastic/ziptastic-php/issues/1)
@@ -13,7 +11,7 @@ Using Ziptastic requires an API key, you can get one by signing up with Ziptasti
 Ziptastic PHP can be installed via composer:
 
 ````
-composer require kregel/ziptastic
+composer require ziptastic/guzzle
 ````
 
 ## Usage
@@ -26,7 +24,7 @@ The first way to use this is by using `Zipper` which will be using a more "plain
 
 include "vendor/autoload.php";
 
-use Kregel\Ziptastic\Zipper;
+use Ziptastic\Guzzle\Zipper;
 
 $key = 'Your Api Key from ziptastic';
 
@@ -42,7 +40,7 @@ If that isn't your cup of tea or you just want to get things done, you can use `
 
 include "vendor/autoload.php";
 
-use Kregel\Ziptastic\Ziptastic;
+use Ziptastic\Guzzle\Ziptastic;
 
 $key = 'Your Api Key from ziptastic';
 
@@ -60,7 +58,7 @@ The first way to use this is by using `Zipper` which will be using a more "plain
 
 include "vendor/autoload.php";
 
-use Kregel\Ziptastic\Zipper;
+use Ziptastic\Guzzle\Zipper;
 
 $key = 'Your Api Key from ziptastic';
 
