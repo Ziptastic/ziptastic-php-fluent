@@ -1,6 +1,6 @@
 <?php
 
-namespace Kregel\Ziptastic\Guzzle;
+namespace Ziptastic\Guzzle\Guzzle;
 
 use ArrayAccess;
 use Exception;
